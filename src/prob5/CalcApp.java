@@ -5,48 +5,47 @@ import java.util.Scanner;
 public class CalcApp {
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner( System.in );
-		
-		for(;;){
-			System.out.print( ">>" );
-			String inputs = scanner.nextLine();
+		int value1;
+		int value2;
+		int result=0;
+		while (true){
 			
-			if( "quit".equals( inputs ) ) {
+			Scanner scanner= new Scanner(System.in);
+			System.out.println(">>");
+			String input = scanner.nextLine();
+			if(input.equals("quit")==true){
 				break;
 			}
-			
-			String[] tokens = inputs.split( " " );
-			
-			Arith arith = null;
-			switch( tokens[ 1 ] ) {
-				case "+" :
-					arith = new Add();
-					break;
-				case "-" :
-					arith = new Sub();
-					break;
-				case "*" :
-					arith = new Mul();
-					break;
-				case "/" :
-					arith = new Div();
-					break;
-				default :
-					System.out.println( "Unknown Operator" );
-					break;
-			}
-			
-			if( arith != null ) {
-				int lValue = Integer.parseInt( tokens[ 0 ] );
-				int rValue = Integer.parseInt( tokens[ 2 ] );
-				
-				arith.setValue( lValue, rValue );
-				int result = arith.calculate();
-				System.out.println( result );
-			}
-		}
+		String [] tokens = input.split(" ");
 		
-		scanner.close();
+		value1 = Integer.parseInt(tokens[0]);
+		value2 = Integer.parseInt(tokens[2]);
+		
+		
+		switch (tokens[1]){
+		case "+" :
+			Add add = new Add();
+			add.setValue(value1,value2);
+			result=add.calculate(value1,value2);
+			break;
+		case "*" :
+			Mul mul = new Mul();
+			mul.setValue(value1,value2);
+			result=mul.calculate(value1,value2);
+			break;
+		case "-" :
+			Sub sub = new Sub();
+			sub.setValue(value1,value2);
+			result=sub.calculate(value1,value2);
+			break;
+		case "/" :
+			Div div = new Div();
+			div.setValue(value1,value2);
+			result=div.calculate(value1,value2);
+			break;
+			
+		}System.out.println(">> "+ result);
+	}	
 	}
-
 }
+
